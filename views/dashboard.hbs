@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{titulo}} - TechStore</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <strong>TechStore</strong>
+    <nav><a href="/productos">Productos</a> <a href="/logout">Cerrar sesión</a></nav>
+  </header>
+  <main class="container">
+    <div class="card">
+      <h1>Panel principal</h1>
+      <p><strong>Usuario:</strong> {{usuario.nombre}}</p>
+      <p><strong>Correo:</strong> {{usuario.email}}</p>
+      <p><strong>Rol:</strong> {{usuario.rol}}</p>
+      <p><strong>Tienda:</strong> {{usuario.tienda}}</p>
+      <a class="btn" href="/productos">Ir al inventario</a>
+    </div>
+  </main>
+</body>
+</html>

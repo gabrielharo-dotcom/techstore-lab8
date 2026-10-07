@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{titulo}} - TechStore</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="card auth-card">
+    <h1>Crear cuenta</h1>
+    {{#if error}}<div class="alert error">{{error}}</div>{{/if}}
+    <form method="POST" action="/registro">
+      <label>Nombre completo</label>
+      <input type="text" name="nombre" required>
+      <label>Correo electrónico</label>
+      <input type="email" name="email" required>
+      <label>Contraseña</label>
+      <input type="password" name="password" required>
+      <small>Mínimo 8 caracteres, una mayúscula, un número y un carácter especial.</small>
+      <label>Tienda asignada</label>
+      <input type="text" name="tienda" required>
+      <label>Rol</label>
+      <select name="rol">
+        <option value="empleado">Empleado de Ventas</option>
+        <option value="gerente">Gerente de Tienda</option>
+        <option value="auditor">Auditor</option>
+        <option value="administrador">Administrador</option>
+      </select>
+      <button type="submit">Registrar</button>
+    </form>
+    <p><a href="/login">Volver al login</a></p>
+  </main>
+</body>
+</html>

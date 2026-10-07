@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{titulo}} - TechStore</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="card auth-card">
+    <h1>Verificación MFA</h1>
+    <p>Ingresa el código de 6 dígitos enviado a tu correo. Es válido por 5 minutos.</p>
+    {{#if error}}<div class="alert error">{{error}}</div>{{/if}}
+    <form method="POST" action="/mfa">
+      <label>Código MFA</label>
+      <input type="text" name="codigo" minlength="6" maxlength="6" pattern="[0-9]{6}" required>
+      <button type="submit">Verificar</button>
+    </form>
+  </main>
+</body>
+</html>

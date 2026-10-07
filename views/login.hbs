@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{titulo}} - TechStore</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="card auth-card">
+    <h1>TechStore</h1>
+    <h2>Iniciar sesión</h2>
+    {{#if error}}<div class="alert error">{{error}}</div>{{/if}}
+    {{#if exito}}<div class="alert success">{{exito}}</div>{{/if}}
+    <form method="POST" action="/login">
+      <label>Correo electrónico</label>
+      <input type="email" name="email" required>
+      <label>Contraseña</label>
+      <input type="password" name="password" required>
+      <button type="submit">Iniciar sesión</button>
+    </form>
+    <div class="social">
+      <a class="btn secondary" href="/auth/google">Continuar con Google</a>
+      <a class="btn secondary" href="/auth/github">Continuar con GitHub</a>
+    </div>
+    <p>¿No tienes cuenta? <a href="/registro">Registrarse</a></p>
+  </main>
+</body>
+</html>

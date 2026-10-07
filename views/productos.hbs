@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{titulo}} - TechStore</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <strong>TechStore</strong>
+    <nav><a href="/dashboard">Inicio</a> <a href="/logout">Cerrar sesión</a></nav>
+  </header>
+  <main class="container">
+    <div class="card">
+      <h1>Inventario</h1>
+      <p>Rol actual: <strong>{{usuario.rol}}</strong> | Tienda: <strong>{{usuario.tienda}}</strong></p>
+
+      {{#if (or (eq usuario.rol 'administrador') (eq usuario.rol 'gerente'))}}
+      <h2>Agregar producto</h2>
+      <form class="grid-form" method="POST" action="/productos">
+        <input name="nombre" placeholder="Nombre" required>
+        <input name="descripcion" placeholder="Descripción">
+        <input name="precio" type="number" min="0" step="0.01" placeholder="Precio" required>
+        <input name="stock" type="number" min="0" placeholder="Stock" required>
+        <input name="tienda" placeholder="Tienda" value="{{usuario.tienda}}" required>
+        <button type="submit">Agregar</button>
+      </form>
+      {{/if}}
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Producto</th><th>Descripción</th><th>Precio</th><th>Stock</th><th>Tienda</th><th>Acciones</th></tr>
+          </thead>
+          <tbody>
+            {{#each productos}}
+            <tr>
+              <td>{{nombre}}</td>
+              <td>{{descripcion}}</td>
+              <td>S/ {{precio}}</td>
+              <td>{{stock}}</td>
+              <td>{{tienda}}</td>
+              <td>
+                {{#unless (eq ../usuario.rol 'auditor')}}
+                <form class="inline" method="POST" action="/productos/{{_id}}/stock">
+                  <input type="number" name="stock" min="0" value="{{stock}}" required>
+                  <button type="submit">Stock</button>
+                </form>
+                {{/unless}}
+
+                {{#if (or (eq ../usuario.rol 'administrador') (eq ../usuario.rol 'gerente'))}}
+                <form class="inline" method="POST" action="/productos/{{_id}}/precio">
+                  <input type="number" step="0.01" min="0" name="precio" value="{{precio}}" required>
+                  <button type="submit">Precio</button>
+                </form>
+                <form class="inline" method="POST" action="/productos/{{_id}}/eliminar">
+                  <button class="danger" type="submit">Eliminar</button>
+                </form>
+                {{/if}}
+              </td>
+            </tr>
+            {{else}}
+            <tr><td colspan="6">No hay productos disponibles.</td></tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
